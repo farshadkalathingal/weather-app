@@ -12,11 +12,9 @@ def HomeView(request):
         time = datetime.datetime.utcnow()
         try:
             r = requests.get(url.format(city, settings.WEATHER_KEY)).json()
-            # Celsius = round((int(r['main']['temp'])-32)*5/9, 1)
-            # feel = round(int(r['main']['feels_like']-32)*5/9)
             arr = ["N","NNE","NE","ENE","E","ESE", "SE", "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"]
             val=int((r['wind']['deg']/22.5)+.5)
-            #print(arr[(val % 16)])
+            
             context = {
                 'city' : r['name'],
                 'country' : r['sys']['country'],
