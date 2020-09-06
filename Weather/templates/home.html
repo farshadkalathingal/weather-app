@@ -30,14 +30,15 @@
                 <div class="col-md-8 col-offset-md-2 mt-5 mx-auto">
                     <form id="search-form" method="POST" action='/'>
                         {% csrf_token %}
-                        <div class="col-auto">
-                          <div class="form-group mx-sm-3 mb-2">
-                            <input type="search" class="form-control" id="city" name='city' placeholder="City Name" required>
+                        <div class="input-group">
+                          <input type="search" name="city" class="form-control"  placeholder="City name" required>
+                
+                          <div class="input-group-append">
+                            <button class="btn btn-search" type="submit">
+                              <img src="{% static 'img/search.svg' %}" alt="search">
+                            </button>
                           </div>
                         </div>
-                        <div class="col-auto">
-                          <button type="submit" class="btn btn-primary mb-2">Search</button>
-                        </div>    
                       </form>
                 </div>
             </div>
@@ -47,7 +48,7 @@
                     <div class="media text-left"> 
                         {% if not Not_Found%}
                         <div class="media-body m-1 p-3">
-                          <h4 class="mt-0 text-capitalize"><img src="{% static 'img/geo-alt-fill.svg' %}" alt="geo"> {{city}}</h4>
+                          <h4 class="mt-0 text-capitalize"><img src="{% static 'img/geo-alt-fill.svg' %}" alt="geo"> {{city}}, {{country}}</h4>
                            <h6>{{time | time}} {{time | date:"l, M d, Y"}}</h6>
                           <div class="row p-4">
                             <div class="col-auto">
@@ -59,6 +60,7 @@
                           </div>
                           <h6><strong>Feels like {{feel}}</strong><sup>o</sup><strong>C</strong>.<strong class="text-capitalize"> {{desc}}</strong>.</h6>
                           <h6>Pressure: {{pressure}}hPa. Humidity: {{humidity}}%.</h6>
+                          <h6>Wind: {{speed}}m/s {{dir}}. Visibility: {{visible}}km</h6>
                         </div>
                         {% else %}
                         <img src="https://image.flaticon.com/icons/png/512/564/564772.png" style="width: 12%;" class="m-1 mr-3" alt="404">

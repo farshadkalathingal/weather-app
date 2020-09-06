@@ -6,24 +6,30 @@ import datetime
 def HomeView(request):
     city = ''
     context = {}
-    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=imperial&appid={}'
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid={}'
     if request.method == 'POST':
         city = request.POST.get('city')
         time = datetime.datetime.utcnow()
         try:
             r = requests.get(url.format(city, settings.WEATHER_KEY)).json()
-            Celsius = round((int(r['main']['temp'])-32)*5/9, 1)
-            feel = round(int(r['main']['feels_like']-32)*5/9)
-           # print(r)
+            # Celsius = round((int(r['main']['temp'])-32)*5/9, 1)
+            # feel = round(int(r['main']['feels_like']-32)*5/9)
+            arr = ["N","NNE","NE","ENE","E","ESE", "SE", "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"]
+            val=int((r['wind']['deg']/22.5)+.5)
+            #print(arr[(val % 16)])
             context = {
-                'city' : city,
-                'temp' : Celsius,
-                'feel' : feel,
+                'city' : r['name'],
+                'country' : r['sys']['country'],
+                'temp' : r['main']['temp'],
+                'feel' : round(r['main']['feels_like']),
                 'pressure' : r['main']['pressure'],
                 'humidity' : r['main']['humidity'],
                 'desc' : r['weather'][0]['description'],
                 'icon' : r['weather'][0]['icon'],
                 'time' : time + datetime.timedelta(0, r['timezone']),
+                'speed' : r['wind']['speed'],
+                'dir' : arr[(val % 16)],
+                'visible' : round(int(r['visibility']/1000), 1),
                 'Not_Found' : None
             }
         except:
