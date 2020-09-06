@@ -1,0 +1,15 @@
+body {
+    height: 100vh;
+}
+.media {
+    border: solid 1px rgb(177, 177, 177);
+    border-radius: 5px;
+    -webkit-box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.5); 
+    box-shadow: 3px 3px 10px 0px rgba(0,0,0,0.5);
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+}
