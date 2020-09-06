@@ -28,7 +28,7 @@
         <div class="container text-center">
             <div class="row">
                 <div class="col-md-8 col-offset-md-2 mt-5 mx-auto">
-                    <form method="POST" action='/'>
+                    <form id="search-form" method="POST" action='/'>
                         {% csrf_token %}
                         <div class="col-auto">
                           <div class="form-group mx-sm-3 mb-2">
@@ -50,14 +50,14 @@
                           <h4 class="mt-0 text-capitalize"><img src="{% static 'img/geo-alt-fill.svg' %}" alt="geo"> {{city}}</h4>
                            <h6>{{time | time}} {{time | date:"l, M d, Y"}}</h6>
                           <div class="row p-4">
-                            <div class="col-md-4">
+                            <div class="col-auto">
                               <img src="https://openweathermap.org/img/w/{{icon}}.png" class="m-1 mr-3" alt="{{city}}">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-auto">
                               <h2 class="mt-2"><strong>{{temp}}</strong><sup>o</sup><strong>C</strong></h2>
                             </div>
                           </div>
-                          <h6><strong>Feels Like {{feel}}</strong><sup>o</sup><strong>C</strong>.<strong class="text-capitalize"> {{desc}}</strong>.</h6>
+                          <h6><strong>Feels like {{feel}}</strong><sup>o</sup><strong>C</strong>.<strong class="text-capitalize"> {{desc}}</strong>.</h6>
                           <h6>Pressure: {{pressure}}hPa. Humidity: {{humidity}}%.</h6>
                         </div>
                         {% else %}
@@ -84,5 +84,6 @@
             </div>
           </div>
     </footer>
+    <!-- <script src="{% static 'js/script.js' %}"></script> -->
 </body>
 </html>
