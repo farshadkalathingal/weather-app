@@ -43,10 +43,10 @@
                 </div>
             </div>
             <div class="row justify-content-md-center mt-5">
+              {% if city %}
+              {% if not Not_Found%}
                 <div class="col-lg-5  col-md-5">
-                    {% if city %}
-                    <div class="media text-left"> 
-                        {% if not Not_Found%}
+                    <div class="media text-left">  
                         <div class="media-body m-1 p-3">
                           <h4 class="mt-0 text-capitalize"><img src="{% static 'img/geo-alt-fill.svg' %}" alt="geo"> {{city}}, {{country}}</h4>
                            <h6>{{current.time | time}} {{current.time | date:"l, M d, Y"}}</h6> {{time1}}
@@ -62,17 +62,7 @@
                           <h6>Pressure: {{current.pressure}}hPa. Humidity: {{current.humidity}}%. UV: {{current.uv}}.</h6>
                           <h6>Wind: {{current.speed}}m/s {{current.dir}}. Visibility: {{current.visible}}km. Dew Point: {{current.dew_p}}.</h6>
                         </div>
-                        {% else %}
-                        <img src="https://image.flaticon.com/icons/png/512/564/564772.png" style="width: 12%;" class="m-1 mr-3" alt="404">
-                        <div class="media-body m-1">
-                          <h5 class="mt-0 text-capitalize">{{city}}</h5>
-                          <h6><span class="text-capitalize">{{city}}</span> is not a city. Try another one. <br>Eg: London</h6>
-                        </div>
-                        {% endif %}
                       </div>
-                      {% else %}
-                        <h5>Search city to get the Weather. <br> Eg: London.</h5>
-                      {% endif %}
                 </div>
                 <div class="col-md-5">
                   <div class="daily">
@@ -132,6 +122,21 @@
                   </div>
                 </div>
             </div>
+            {% else %}
+            <div class="col-md-5">
+              <div class="media">
+                <img src="https://image.flaticon.com/icons/png/512/564/564772.png" style="width: 12%;" class="m-1 mr-3" alt="404">
+              <div class="media-body m-1">
+                <h5 class="mt-0 text-capitalize">{{city}}</h5>
+                <h6><span class="text-capitalize">{{city}}</span> is not a city. Try another one. <br>Eg: London</h6>
+              </div>
+              </div>
+            </div>
+              
+              {% endif %}
+            {% else %}
+              <h5>Search city to get the Weather. <br> Eg: London.</h5>
+            {% endif %}
         </div>
     </div>
     <footer>
