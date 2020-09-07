@@ -1,29 +1,6 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeatherMe</title>
-    <!-- CSS only -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-            <a class="navbar-brand" href="/">WeatherMe</a>
-              <!-- <ul class="navbar-nav mx-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
-              </ul> -->
-          </nav>
-    </header>
+{% block content %}
     <div class="home">
         <div class="container text-center">
             <div class="row">
@@ -31,7 +8,7 @@
                     <form id="search-form" method="POST" action='/'>
                         {% csrf_token %}
                         <div class="input-group">
-                          <input type="search" name="city" class="form-control"  placeholder="City name" required>
+                          <input type="search" name="city" id="city" class="form-control"  placeholder="City name" required>
                 
                           <div class="input-group-append">
                             <button class="btn btn-search" type="submit">
@@ -60,7 +37,7 @@
                           </div>
                           <h6><strong>Feels like {{current.feel}}</strong><sup>o</sup><strong>C</strong>.<strong class="text-capitalize"> {{current.desc}}</strong>.</h6>
                           <h6>Pressure: {{current.pressure}}hPa. Humidity: {{current.humidity}}%. UV: {{current.uv}}.</h6>
-                          <h6>Wind: {{current.speed}}m/s {{current.dir}}. Visibility: {{current.visible}}km. Dew Point: {{current.dew_p}}.</h6>
+                          <h6>Wind: {{current.speed}}m/s {{current.dir}}. Visibility: {{current.visible}}km. Dew Point: {{current.dew_p}}<sup>o</sup>.</h6>
                         </div>
                       </div>
                 </div>
@@ -88,14 +65,14 @@
                             <td><small>Night</small></td>
                           </tr>
                           <tr>
-                            <td><small>TEMPERATURE</small></td>
+                            <td class="text-left"><small>TEMPERATURE</small></td>
                             <td>{{day.morn}}</td>
                             <td>{{day.day}}</td>
                             <td>{{day.eve}}</td>
                             <td>{{day.night}}</td>
                           </tr>
                           <tr>
-                            <td><small>FEELS LIKE</small></td>
+                            <td class="text-left"><small>FEELS LIKE</small></td>
                             <td>{{day.f_morn}}</td>
                             <td>{{day.f_day}}</td>
                             <td>{{day.f_eve}}</td>
@@ -103,12 +80,12 @@
                           </tr>
                         </table>
                       </div>
-                      <div class="row mt-2">
+                      <div class="row mt-2 text-left">
                         <h6>Wind: {{day.w_speed}}m/s {{day.w_dire}} Pressure: {{day.pressure}}hP<br />
-                          Humidity: {{day.humidity}}% UV: {{day.uv}} Dew point: {{day.dew}}<sup>o</sup>C</h6>
+                          Humidity: {{day.humidity}}% UV: {{day.uv}} Dew point: {{day.dew}}<sup>o</sup></h6>
                       </div>
                       <div class="row d-flex justify-content-flex-start">
-                        <div>
+                        <div class="mr-2">
                           <small>SUNRISE</small>
                           <h6>{{day.sunrise|time}}</h6>
                         </div>
@@ -142,15 +119,4 @@
             {% endif %}
         </div>
     </div>
-    <footer>
-        <div class="container text-center p-3 mt-2">
-            <div class="row">
-              <div class="col-md-12">
-                <p>Developed by <a href="https://www.linkedin.com/in/farshadkalathingal/">Farshad Kalathingal</a></p>
-              </div>
-            </div>
-          </div>
-    </footer>
-    <script src="{% static 'js/script.js' %}"></script>
-</body>
-</html>
+    {% endblock %}
