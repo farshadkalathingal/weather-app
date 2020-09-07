@@ -43,24 +43,24 @@
                 </div>
             </div>
             <div class="row justify-content-md-center mt-5">
-                <div class="col-lg-4 col-md-4">
+                <div class="col-lg-5  col-md-5">
                     {% if city %}
                     <div class="media text-left"> 
                         {% if not Not_Found%}
                         <div class="media-body m-1 p-3">
                           <h4 class="mt-0 text-capitalize"><img src="{% static 'img/geo-alt-fill.svg' %}" alt="geo"> {{city}}, {{country}}</h4>
-                           <h6>{{time | time}} {{time | date:"l, M d, Y"}}</h6>
+                           <h6>{{current.time | time}} {{current.time | date:"l, M d, Y"}}</h6> {{time1}}
                           <div class="row p-4">
                             <div class="col-auto">
-                              <img src="https://openweathermap.org/img/w/{{icon}}.png" class="m-1 mr-3" alt="{{city}}">
+                              <img src="https://openweathermap.org/img/w/{{current.icon}}.png" class="m-1 mr-3" alt="{{city}}">
                             </div>
                             <div class="col-auto">
-                              <h2 class="mt-2"><strong>{{temp}}</strong><sup>o</sup><strong>C</strong></h2>
+                              <h2 class="mt-2"><strong>{{current.temp}}</strong><sup>o</sup><strong>C</strong></h2>
                             </div>
                           </div>
-                          <h6><strong>Feels like {{feel}}</strong><sup>o</sup><strong>C</strong>.<strong class="text-capitalize"> {{desc}}</strong>.</h6>
-                          <h6>Pressure: {{pressure}}hPa. Humidity: {{humidity}}%.</h6>
-                          <h6>Wind: {{speed}}m/s {{dir}}. Visibility: {{visible}}km</h6>
+                          <h6><strong>Feels like {{current.feel}}</strong><sup>o</sup><strong>C</strong>.<strong class="text-capitalize"> {{current.desc}}</strong>.</h6>
+                          <h6>Pressure: {{current.pressure}}hPa. Humidity: {{current.humidity}}%. UV: {{current.uv}}.</h6>
+                          <h6>Wind: {{current.speed}}m/s {{current.dir}}. Visibility: {{current.visible}}km. Dew Point: {{current.dew_p}}.</h6>
                         </div>
                         {% else %}
                         <img src="https://image.flaticon.com/icons/png/512/564/564772.png" style="width: 12%;" class="m-1 mr-3" alt="404">
@@ -74,6 +74,63 @@
                         <h5>Search city to get the Weather. <br> Eg: London.</h5>
                       {% endif %}
                 </div>
+                <div class="col-md-5">
+                  <div class="daily">
+                    {% for day in daily %}
+                    <button class="accordion">{{ day.dt | date:"D, M d" }} <span>{{day.max}}/{{day.min}}<sup>o</sup>C</span></button>
+                    <div class="panel">
+                      <div class="row mt-2">
+                        <div class="col-auto">
+                          <img src="https://openweathermap.org/img/w/{{day.icon}}.png" alt="img">
+                        </div>
+                        <div class="col-auto text-left">
+                          <h6 class="text-capitalize"><strong>{{day.desc}}</strong></h6>
+                          <h6>The high will be {{day.max}}<sup>o</sup>C, the low will be {{day.min}}<sup>o</sup>C.</h6>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <table class="mx-auto">
+                          <tr>
+                            <td></td>
+                            <td><small>Morning</small></td>
+                            <td><small>Afternoon</small></td>
+                            <td><small>Evening</small></td>
+                            <td><small>Night</small></td>
+                          </tr>
+                          <tr>
+                            <td><small>TEMPERATURE</small></td>
+                            <td>{{day.morn}}</td>
+                            <td>{{day.day}}</td>
+                            <td>{{day.eve}}</td>
+                            <td>{{day.night}}</td>
+                          </tr>
+                          <tr>
+                            <td><small>FEELS LIKE</small></td>
+                            <td>{{day.f_morn}}</td>
+                            <td>{{day.f_day}}</td>
+                            <td>{{day.f_eve}}</td>
+                            <td>{{day.f_night}}</td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div class="row mt-2">
+                        <h6>Wind: {{day.w_speed}}m/s {{day.w_dire}} Pressure: {{day.pressure}}hP<br />
+                          Humidity: {{day.humidity}}% UV: {{day.uv}} Dew point: {{day.dew}}<sup>o</sup>C</h6>
+                      </div>
+                      <div class="row d-flex justify-content-flex-start">
+                        <div>
+                          <small>SUNRISE</small>
+                          <h6>{{day.sunrise|time}}</h6>
+                        </div>
+                        <div>
+                          <small>SUNSET</small>
+                          <h6>{{day.sunset|time}}</h6>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -86,6 +143,6 @@
             </div>
           </div>
     </footer>
-    <!-- <script src="{% static 'js/script.js' %}"></script> -->
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
