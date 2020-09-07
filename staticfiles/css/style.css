@@ -24,7 +24,9 @@ body {
 } */
 
 .btn-search {
-    border: 1px solid #ced4da;
+    border-bottom: 2px solid #28a745 !important;
+    margin-top: -1px;
+    border-radius: 0px;
 }
 
 h6 {
@@ -100,3 +102,9 @@ button.btn:focus {
       border-bottom-right-radius: 5px;
       border-bottom-left-radius: 5px;
   } */
+
+  input[type=search] {
+      border: none;
+      border-bottom: 2px solid #28a745 !important;
+      border-radius: 0px;
+  }

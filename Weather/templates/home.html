@@ -27,7 +27,7 @@
     <div class="home">
         <div class="container text-center">
             <div class="row">
-                <div class="col-md-8 col-offset-md-2 mt-5 mx-auto">
+                <div class="col-md-8 col-offset-md-2 mt-2 mx-auto">
                     <form id="search-form" method="POST" action='/'>
                         {% csrf_token %}
                         <div class="input-group">
@@ -123,7 +123,7 @@
                 </div>
             </div>
             {% else %}
-            <div class="col-md-5">
+            <div class="col-md-5" style="height: 60vh;">
               <div class="media">
                 <img src="https://image.flaticon.com/icons/png/512/564/564772.png" style="width: 12%;" class="m-1 mr-3" alt="404">
               <div class="media-body m-1">
@@ -135,7 +135,10 @@
               
               {% endif %}
             {% else %}
-              <h5>Search city to get the Weather. <br> Eg: London.</h5>
+              <div style="height: 60vh">
+                <h5>Search city to get the Weather. <br> Eg: London.</h5>
+              </div>
+              
             {% endif %}
         </div>
     </div>
